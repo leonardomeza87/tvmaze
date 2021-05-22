@@ -20,7 +20,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 h1 {
@@ -46,10 +46,11 @@ p {
 }
 
 section {
-  min-width: 80%;
+  width: 100%;
 }
 
 input {
+  width: 100%;
   margin: 2rem 0;
 }
 
@@ -58,16 +59,23 @@ img {
   width: auto;
   height: 120px;
   border-radius: 4px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 12px;
 }
 
 article {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: row-reverse;
-          flex-direction: row-reverse;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
@@ -83,10 +91,32 @@ article {
   cursor: pointer;
 }
 
-article h3 {
+article .info {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+article .info h3,
+article .info p {
   width: 100%;
   text-align: center;
-  padding: 1rem;
+  padding: 0 1rem;
+}
+
+article .info p {
+  font-size: 14px;
 }
 
 .loader {

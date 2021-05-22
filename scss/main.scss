@@ -10,7 +10,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 h1 {
@@ -36,10 +36,11 @@ p {
 }
 
 section {
-  min-width: 80%;
+  width: 100%;
 }
 
 input {
+  width: 100%;
   margin: 2rem 0;
 }
 
@@ -48,11 +49,15 @@ img {
   width: auto;
   height: 120px;
   border-radius: 4px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
 }
 
 article {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: flex-end;
   align-items: center;
   border: 1px solid #ddd;
@@ -63,10 +68,23 @@ article {
   margin-bottom: 0.5rem;
   cursor: pointer;
 
-  h3 {
+  .info {
     width: 100%;
-    text-align: center;
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    h3,
+    p {
+      width: 100%;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    p {
+      font-size: 14px;
+    }
   }
 }
 
