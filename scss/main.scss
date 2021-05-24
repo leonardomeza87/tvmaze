@@ -6,25 +6,22 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1.5rem;
+  padding: 1rem 1.5rem 1.5rem;
+  background-color: #111;
+  position: relative;
 }
 
-h1 {
+h2 {
   text-align: center;
+  color: #fff;
+  margin: 1rem 0 2rem;
 }
 
-input {
-  padding: 1rem;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-
-  &:focus {
-    outline: none;
-  }
+.grid-fluid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  justify-items: center;
+  gap: 1rem;
 }
 
 img[src$="footer-powered-by-000webhost-white2.png"] {
@@ -39,63 +36,266 @@ section {
   width: 100%;
 }
 
-input {
+.header {
+  height: 5rem;
+  color: #fff;
   width: 100%;
-  margin: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #111;
+  z-index: 100;
+  padding: 1rem;
+
+  .logo {
+    height: 100%;
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1rem;
+
+    svg {
+      height: 100%;
+
+      path:nth-child(2) {
+        fill: #fff;
+      }
+    }
+
+    h1 {
+      font-size: 32px;
+      line-height: 48px;
+      font-style: italic;
+      margin: 0 1rem;
+    }
+  }
+
+  .search {
+    height: 100%;
+    padding: 0.5rem;
+    cursor: pointer;
+    margin-left: 2rem;
+
+    &:hover > svg {
+      transform: scale(1.1);
+    }
+
+    svg {
+      height: 100%;
+      transition: transform 0.2s ease-in-out;
+    }
+  }
 }
 
-img {
-  min-width: 85.4167px;
-  width: auto;
-  height: 120px;
-  border-radius: 4px;
-  text-align: center;
+.search-container {
+  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-}
-
-article {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  border: 1px solid #ddd;
-  padding: 4px;
-  border-radius: 8px;
-  text-align: center;
   width: 100%;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
+  height: 100%;
 
-  .info {
+  #search {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .search-results {
+    position: absolute;
+    top: 4rem;
+    background-color: #444;
+    padding: 0.25rem 0.5rem;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
 
-    h3,
-    p {
+.show {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  min-width: 144px;
+  max-width: 144px;
+  cursor: default;
+  background-color: #222;
+  color: #fff;
+
+  .show-picture {
+    min-width: 144px;
+    max-width: 100%;
+    height: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      filter: opacity(0.8);
+    }
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0.5rem 0.25rem;
+    position: relative;
+
+    .rating {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       width: 100%;
-      text-align: center;
-      padding: 0 1rem;
+      height: 2rem;
+      padding: 0.5rem;
+
+      svg {
+        height: 100%;
+        fill: orange;
+      }
+      p {
+        font-size: 16px;
+        line-height: 16px;
+        padding-left: 0.25rem;
+        font-weight: 400;
+      }
     }
 
-    p {
-      font-size: 14px;
+    .title {
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      font-size: 16px;
+      line-height: 16px;
+      font-weight: 400;
+      padding: 0.5rem;
+      cursor: pointer;
+      max-width: 200px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .details {
+      padding: 0.5rem 0.5rem 0;
+
+      svg {
+        height: 1.25rem;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+.preview-show {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  height: 144px;
+  cursor: default;
+  background-color: #222;
+  color: #fff;
+  margin: 0.25rem 0;
+
+  .show-picture {
+    height: 100%;
+    width: 102.517px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      filter: opacity(0.8);
+    }
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0.75rem;
+    position: relative;
+
+    .rating {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      height: 2rem;
+      padding: 0.5rem;
+
+      svg {
+        height: 100%;
+        fill: orange;
+      }
+      p {
+        font-size: 16px;
+        line-height: 16px;
+        padding-left: 0.25rem;
+        font-weight: 400;
+      }
+    }
+
+    .title {
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      line-height: 16px;
+      font-weight: 400;
+      padding: 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .details {
+      padding: 0.5rem 0.5rem 0;
+
+      svg {
+        height: 1.25rem;
+        margin-right: 0.5rem;
+      }
     }
   }
 }
 
 .loader {
-  margin: 0 auto;
+  margin: 2rem auto;
   width: 50px;
   height: 50px;
-  border: 6px solid #111;
+  border: 6px solid #fff;
   border-radius: 0 50% 50% 50%;
   display: block;
   animation: spin 1s infinite linear;
+  color: #fff;
 
   @keyframes spin {
     0% {
@@ -104,5 +304,17 @@ article {
     100% {
       transform: rotate(360deg);
     }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .grid-fluid {
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  }
+  .show {
+    max-width: 200px;
+  }
+  .header .logo h1 {
+    font-size: 42px;
   }
 }
