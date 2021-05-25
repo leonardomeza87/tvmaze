@@ -1,40 +1,4 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  padding: 1rem 1.5rem 1.5rem;
-  background-color: #111;
-  position: relative;
-}
-
-h2 {
-  text-align: center;
-  color: #fff;
-  margin: 1rem 0 2rem;
-}
-
-.grid-fluid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
-  justify-items: center;
-  gap: 1rem;
-}
-
-img[src$="footer-powered-by-000webhost-white2.png"] {
-  display: none !important;
-}
-
-p {
-  text-align: center;
-}
-
-section {
-  width: 100%;
-}
+@import "base";
 
 .header {
   height: 5rem;
@@ -55,6 +19,7 @@ section {
     justify-content: space-between;
     align-items: center;
     margin-left: 1rem;
+    cursor: pointer;
 
     svg {
       height: 100%;
@@ -113,7 +78,7 @@ section {
     top: 4rem;
     background-color: #444;
     padding: 0.25rem 0.5rem;
-    width: 100%;
+    width: 80vw;
     display: flex;
     flex-direction: column;
     max-height: 80vh;
@@ -201,6 +166,7 @@ section {
       svg {
         height: 1.25rem;
         margin-right: 0.5rem;
+        fill: #fff;
       }
     }
   }
@@ -282,6 +248,7 @@ section {
       svg {
         height: 1.25rem;
         margin-right: 0.5rem;
+        fill: #fff;
       }
     }
   }
@@ -307,6 +274,14 @@ section {
   }
 }
 
+.back {
+  width: 100%;
+  padding: 1rem;
+  margin: 2rem 0;
+  text-align: center;
+  display: block;
+}
+
 @media screen and (min-width: 600px) {
   .grid-fluid {
     grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
@@ -316,5 +291,9 @@ section {
   }
   .header .logo h1 {
     font-size: 42px;
+  }
+
+  .search-container .search-results {
+    width: 100%;
   }
 }

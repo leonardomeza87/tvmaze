@@ -1,3 +1,5 @@
+import icon from "./icons.js";
+
 const d = document,
   $shows = d.querySelector("#shows"),
   $previewShows = d.querySelector(".search-results"),
@@ -6,10 +8,79 @@ const d = document,
   $fragment = d.createDocumentFragment(),
   $search = d.getElementById("search");
 
+function createTemp(template, endpoint) {
+  template.querySelector(".details").innerHTML = "";
+
+  //Show features
+  template.querySelector("h3").textContent = endpoint.name;
+  template.querySelector("h3").setAttribute("data-id", endpoint.id);
+  template.querySelector("img").alt = endpoint.name;
+  template.querySelector("img").setAttribute("data-id", endpoint.id);
+  template.querySelector("img").src = endpoint.image
+    ? endpoint.image.medium
+    : "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
+  template.querySelector(".rating p").textContent = endpoint.rating.average
+    ? endpoint.rating.average
+    : "0";
+
+  //Details
+  if (endpoint.status === "Running") {
+    template.querySelector(".details").innerHTML += icon.tv;
+  }
+
+  //Type
+  switch (endpoint.type) {
+    case "Scripted":
+      template.querySelector(".details").innerHTML += icon.scripted;
+      break;
+    case "Animation":
+      template.querySelector(".details").innerHTML += icon.animation;
+      break;
+    case "Reality":
+      template.querySelector(".details").innerHTML += icon.reality;
+      break;
+    case "Talk Show":
+      template.querySelector(".details").innerHTML += icon.talk;
+      break;
+    case "Documentary":
+      template.querySelector(".details").innerHTML += icon.documentary;
+      break;
+    case "Game Show":
+      template.querySelector(".details").innerHTML += icon.game;
+      break;
+    case "News":
+      template.querySelector(".details").innerHTML += icon.news;
+      break;
+    case "Sports":
+      template.querySelector(".details").innerHTML += icon.sports;
+      break;
+    case "Variety":
+      template.querySelector(".details").innerHTML += icon.variety;
+      break;
+    case "Award Show":
+      template.querySelector(".details").innerHTML += icon.award;
+      break;
+    case "Panel Show":
+      template.querySelector(".details").innerHTML += icon.panel;
+      break;
+    default:
+      break;
+  }
+
+  //Official Site
+  if (endpoint.officialSite) {
+    template.querySelector(
+      ".details"
+    ).innerHTML += `<a href="${endpoint.officialSite}" target="_blank">${icon.website}</a>`;
+  }
+
+  //Clone
+  let $clone = d.importNode(template, true);
+  $fragment.appendChild($clone);
+}
+
 d.addEventListener("keyup", async (e) => {
   if (e.target.matches("#search")) {
-    // console.log(e.key);
-
     try {
       $previewShows.innerHTML = `<span class="loader"></span>`;
 
@@ -28,23 +99,7 @@ d.addEventListener("keyup", async (e) => {
         }
       } else {
         json.forEach((el) => {
-          console.log(el.show.id);
-          $previewShowTemp.querySelector("h3").textContent = el.show.name;
-          $previewShowTemp.querySelector("p").textContent = "";
-
-          // $template.querySelector("div").innerHTML = el.show.summary
-          //   ? el.show.summary
-          //   : "Description not provided";
-          $previewShowTemp.querySelector("img").src = el.show.image
-            ? el.show.image.medium
-            : "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
-          $previewShowTemp.querySelector("img").alt = el.show.name;
-          $previewShowTemp
-            .querySelector(".preview-show")
-            .setAttribute("data-id", el.show.id);
-
-          let $clone = d.importNode($previewShowTemp, true);
-          $fragment.appendChild($clone);
+          createTemp($previewShowTemp, el.show);
         });
 
         $previewShows.innerHTML = "";
@@ -60,7 +115,7 @@ d.addEventListener("keyup", async (e) => {
   }
 });
 
-const getShow = async (url, id) => {
+const getCast = async (url, id) => {
   try {
     $shows.innerHTML = `<span class="loader"></span>`;
 
@@ -75,13 +130,18 @@ const getShow = async (url, id) => {
       json.forEach((el) => {
         console.log(el);
         $showTemp.querySelector("h3").textContent = el.person.name;
-        $showTemp.querySelector("p").textContent = `"${el.character.name}"`;
-
+        $showTemp.querySelector("h3").setAttribute("data-id", id);
+        $showTemp.querySelector(".rating p").textContent = el.person.country
+          ? el.person.country.name
+          : "";
+        $showTemp.querySelector(
+          ".details"
+        ).textContent = `"${el.character.name}"`;
+        $showTemp.querySelector("img").setAttribute("data-id", id);
         $showTemp.querySelector("img").src = el.person.image
           ? el.person.image.medium
           : "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
         $showTemp.querySelector("img").alt = el.person.name;
-        $showTemp.querySelector(".show").setAttribute("data-id", id);
 
         let $clone = d.importNode($showTemp, true);
         $fragment.appendChild($clone);
@@ -89,47 +149,9 @@ const getShow = async (url, id) => {
 
       $shows.innerHTML = "";
       $shows.appendChild($fragment);
-    }
-
-    if (!res.ok) throw { status: res.status, statusText: res.statusText };
-  } catch (error) {
-    console.log(error);
-    let message = error.statusText || "An error occurred";
-    $shows.innerHTML = `<p>Error: ${error.status}: ${message}</p>`;
-  }
-};
-const getShows = async (url) => {
-  try {
-    $shows.innerHTML = `<span class="loader"></span>`;
-
-    let res = await fetch(url),
-      json = await res.json();
-
-    console.log(json);
-
-    if (json.length === 0) {
-      $shows.innerHTML = `<p>String <mark>"${query}"</mark> not found</p>`;
-    } else {
-      json.forEach((el) => {
-        console.log(el.id);
-        $showTemp.querySelector("h3").textContent = el.name;
-        $showTemp.querySelector("p").textContent = "";
-
-        // $template.querySelector("div").innerHTML = el.show.summary
-        //   ? el.show.summary
-        //   : "Description not provided";
-        $showTemp.querySelector("img").src = el.image
-          ? el.image.medium
-          : "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
-        $showTemp.querySelector("img").alt = el.name;
-        $showTemp.querySelector(".show").setAttribute("data-id", el.id);
-
-        let $clone = d.importNode($showTemp, true);
-        $fragment.appendChild($clone);
-      });
-
-      $shows.innerHTML = "";
-      $shows.appendChild($fragment);
+      d.querySelector(
+        "body"
+      ).innerHTML += `<a href="./" class="back">Go back</a>`;
     }
 
     if (!res.ok) throw { status: res.status, statusText: res.statusText };
@@ -141,12 +163,11 @@ const getShows = async (url) => {
 };
 
 d.addEventListener("click", (e) => {
-  if (e.target.matches("article")) {
+  console.log(e.target);
+  if (e.target.matches("img") || e.target.matches("h3")) {
     let id = e.target.getAttribute("data-id");
-    getShow(`https://api.tvmaze.com/shows/${id}/cast`, id);
-  } else if (e.target.matches("article *")) {
-    let id = e.target.parentElement.getAttribute("data-id");
-    getShow(`https://api.tvmaze.com/shows/${id}/cast`, id);
+    getCast(`https://api.tvmaze.com/shows/${id}/cast`, id);
+    $previewShows.innerHTML = "";
   }
 });
 
@@ -159,28 +180,17 @@ const recentlyUpdated = async () => {
     let res = await fetch(url),
       json = await res.json();
 
-    console.log(json);
-
     let counter = 0;
 
     if (json.length === 0) {
       $shows.innerHTML = `<p>Error</p>`;
     } else {
       for (let key in json) {
-        console.log(key, typeof key);
-
         let res = await fetch(`https://api.tvmaze.com/shows/${key}`),
           json = await res.json();
 
         console.log(json);
-
-        $showTemp.querySelector("h3").textContent = json.name;
-        $showTemp.querySelector("img").src = json.image
-          ? json.image.original
-          : "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
-
-        let $clone = d.importNode($showTemp, true);
-        $fragment.appendChild($clone);
+        createTemp($showTemp, json);
 
         //Counter
         counter++;
@@ -192,26 +202,6 @@ const recentlyUpdated = async () => {
       $shows.appendChild($fragment);
     }
   } catch (error) {
-    // json.forEach((el) => {
-    //   console.log(el);
-    //   // $template.querySelector("h3").textContent = el.name;
-    //   // $template.querySelector("p").textContent = "";
-
-    //   // // $template.querySelector("div").innerHTML = el.show.summary
-    //   // //   ? el.show.summary
-    //   // //   : "Description not provided";
-    //   // $template.querySelector("img").src = el.image
-    //   //   ? el.image.medium
-    //   //   : "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
-    //   // $template.querySelector("img").alt = el.name;
-    //   // $template.querySelector(".show").setAttribute("data-id", el.id);
-
-    //   // let $clone = d.importNode($template, true);
-    //   // $fragment.appendChild($clone);
-    // });
-
-    // $shows.innerHTML = "";
-    // $shows.appendChild($fragment);
     console.log(error);
   }
 };

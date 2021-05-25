@@ -7,7 +7,6 @@
 }
 
 body {
-  padding: 1rem 1.5rem 1.5rem;
   background-color: #111;
   position: relative;
 }
@@ -33,6 +32,10 @@ img[src$="footer-powered-by-000webhost-white2.png"] {
 
 p {
   text-align: center;
+}
+
+a {
+  color: #fff;
 }
 
 section {
@@ -71,6 +74,7 @@ section {
       -ms-flex-align: center;
           align-items: center;
   margin-left: 1rem;
+  cursor: pointer;
 }
 
 .header .logo svg {
@@ -135,7 +139,7 @@ section {
   top: 4rem;
   background-color: #444;
   padding: 0.25rem 0.5rem;
-  width: 100%;
+  width: 80vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -262,6 +266,7 @@ section {
 .show .container .details svg {
   height: 1.25rem;
   margin-right: 0.5rem;
+  fill: #fff;
 }
 
 .preview-show {
@@ -372,6 +377,7 @@ section {
 .preview-show .container .details svg {
   height: 1.25rem;
   margin-right: 0.5rem;
+  fill: #fff;
 }
 
 .loader {
@@ -408,6 +414,14 @@ section {
   }
 }
 
+.back {
+  width: 100%;
+  padding: 1rem;
+  margin: 2rem 0;
+  text-align: center;
+  display: block;
+}
+
 @media screen and (min-width: 600px) {
   .grid-fluid {
     -ms-grid-columns: (minmax(12.5rem, 1fr))[auto-fit];
@@ -418,6 +432,9 @@ section {
   }
   .header .logo h1 {
     font-size: 42px;
+  }
+  .search-container .search-results {
+    width: 100%;
   }
 }
 /*# sourceMappingURL=main.css.map */

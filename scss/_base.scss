@@ -1,0 +1,40 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  // padding: 1rem 1.5rem 1.5rem;
+  background-color: #111;
+  position: relative;
+}
+
+h2 {
+  text-align: center;
+  color: #fff;
+  margin: 1rem 0 2rem;
+}
+
+.grid-fluid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  justify-items: center;
+  gap: 1rem;
+}
+
+img[src$="footer-powered-by-000webhost-white2.png"] {
+  display: none !important;
+}
+
+p {
+  text-align: center;
+}
+a {
+  color: #fff;
+}
+
+section {
+  width: 100%;
+}
